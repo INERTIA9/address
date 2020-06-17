@@ -10,7 +10,7 @@ public class AddressBook {
         boolean isContinue = true;
         while (isContinue == true) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("1)ADD   2)EDIT   3)DELETE  4)Sort By Name  5)Sort By City  6)Sort By State  7)Sort By Zip  8)Search by City & State  9)EXIT");
+            System.out.println("1)ADD   2)EDIT   3)DELETE  4)Sort By Name  5)Sort By City  6)Sort By State  7)Sort By Zip  8)Search by City & State  9)Search by City  10)Search by State  11)EXIT");
             int select = sc.nextInt();
             switch (select) {
                 case 1:
@@ -89,6 +89,26 @@ public class AddressBook {
                     });
                     break;
                 case 9:
+                    sc.nextLine();
+                    System.out.println("Enter the City");
+                    String city1 = sc.nextLine();
+                    personList.stream().forEach(p->{
+                        if(p.getCity().equals(city1)){
+                            System.out.println(p);
+                        }
+                    });
+                    break;
+                case 10:
+                    sc.nextLine();
+                    System.out.println("Enter the State");
+                    String state1 = sc.nextLine();
+                    personList.stream().forEach(p->{
+                        if(p.getState().equals(state1)){
+                            System.out.println(p);
+                        }
+                    });
+                    break;
+                case 11:
                     isContinue = false;
                     break;
                 default:
