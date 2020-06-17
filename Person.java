@@ -8,6 +8,7 @@ public class Person {
     private String state;
     private Integer zip;
     private Long pnum;
+    private String cityState;
 
     public String getFname() {
         return Fname;
@@ -45,6 +46,14 @@ public class Person {
     public void setPnum(Long pnum) {
         this.pnum = pnum;
     }
+
+    public String getCityState() {
+        return cityState;
+    }
+    public void setCityState(String cityState) {
+        this.cityState = cityState;
+    }
+
     @Override
     public String toString() {
         return "Person [Fname=" + Fname + ", Lname=" + Lname + ", city=" + city + ", state=" + state + ", zip=" + zip

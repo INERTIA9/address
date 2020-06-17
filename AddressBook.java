@@ -1,9 +1,6 @@
 package com.bridgelabz;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook {
@@ -13,7 +10,7 @@ public class AddressBook {
         boolean isContinue = true;
         while (isContinue == true) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("1)ADD   2)EDIT   3)DELETE  4)Sort By Name  7)EXIT");
+            System.out.println("1)ADD   2)EDIT   3)DELETE  4)Sort By Name  5)Sort By City  6)Sort By State  7)Sort By Zip  8)Search by City & State  9)EXIT");
             int select = sc.nextInt();
             switch (select) {
                 case 1:
@@ -61,7 +58,37 @@ public class AddressBook {
                         System.out.println(p);
                     });
                     break;
+                case 5:
+                    personList = personList.stream().sorted((p1 , p2) -> p1.getCity().compareTo(p2.getCity())).collect(Collectors.toList());
+                    personList.stream().forEach(p->{
+                        System.out.println(p);
+                    });
+                    break;
+                case 6:
+                    personList = personList.stream().sorted((p1 , p2) -> p1.getState().compareTo(p2.getState())).collect(Collectors.toList());
+                    personList.stream().forEach(p->{
+                        System.out.println(p);
+                    });
+                    break;
                 case 7:
+                    personList = personList.stream().sorted((p1 , p2) -> p1.getZip().compareTo(p2.getZip())).collect(Collectors.toList());
+                    personList.stream().forEach(p->{
+                        System.out.println(p);
+                    });
+                    break;
+                /*case 8:
+                    sc.nextLine();
+                    System.out.println("Enter the City");
+                    String city = sc.nextLine();
+                    System.out.println("Enter the State");
+                    String state = sc.nextLine();
+                    personList.stream().forEach(p->{
+                        if(p.getCity().equals(city) && p.getState().equals(state)){
+                            System.out.println(p);
+                        }
+                    });
+                    break;*/
+                case 9:
                     isContinue = false;
                     break;
                 default:
@@ -70,9 +97,9 @@ public class AddressBook {
             }
 
             System.out.println(personList.size());
-            personList.stream().forEach(p->{
+           /* personList.stream().forEach(p->{
                 System.out.println(p);
-            });
+            });*/
         }
     }
 }

@@ -23,6 +23,7 @@ public class PersonUtils {
         System.out.println("Enter the State");
         person.setState(sc.nextLine());
         // pr1.state = sc.nextLine();
+        person.setCityState(person.getCity()+person.getState());
         System.out.println("Enter the 6 Digit Zip code");
         int zip = sc.nextInt();
         // pr1.zip = sc.nextInt();
