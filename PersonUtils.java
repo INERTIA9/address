@@ -11,7 +11,7 @@ public class PersonUtils {
         person.setFname(sc.nextLine());
         System.out.println("Enter the Last Name");
         person.setLname(sc.nextLine());
-        reuseRecord(person);
+        //reuseRecord(person);
         return person;
     }
 

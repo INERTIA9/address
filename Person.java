@@ -51,6 +51,35 @@ public class Person {
                 + ", pnum=" + pnum + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((Fname == null) ? 0 : Fname.hashCode());
+        result = prime * result + ((Lname == null) ? 0 : Lname.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Person other = (Person) obj;
+        if (Fname == null) {
+            if (other.Fname != null)
+                return false;
+        } else if (!Fname.equals(other.Fname))
+            return false;
+        if (Lname == null) {
+            if (other.Lname != null)
+                return false;
+        } else if (!Lname.equals(other.Lname))
+            return false;
+        return true;
+    }
 
 }
 
