@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
     public static void main(String[] args) {
@@ -12,7 +13,7 @@ public class AddressBook {
         boolean isContinue = true;
         while (isContinue == true) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("1)ADD   2)EDIT   3)DELETE   7)EXIT");
+            System.out.println("1)ADD   2)EDIT   3)DELETE  4)Sort By Name  7)EXIT");
             int select = sc.nextInt();
             switch (select) {
                 case 1:
@@ -53,6 +54,12 @@ public class AddressBook {
                     }else{
                         System.out.println("Person Does not Exist :"+ personDelete.getFname() + " " + personDelete.getLname());
                     }
+                    break;
+                case 4:
+                    personList = personList.stream().sorted((p1 , p2) -> p1.getFname().compareTo(p2.getFname())).collect(Collectors.toList());
+                    personList.stream().forEach(p->{
+                        System.out.println(p);
+                    });
                     break;
                 case 7:
                     isContinue = false;
