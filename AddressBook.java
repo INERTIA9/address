@@ -76,7 +76,7 @@ public class AddressBook {
                         System.out.println(p);
                     });
                     break;
-                /*case 8:
+                case 8:
                     sc.nextLine();
                     System.out.println("Enter the City");
                     String city = sc.nextLine();
@@ -87,7 +87,7 @@ public class AddressBook {
                             System.out.println(p);
                         }
                     });
-                    break;*/
+                    break;
                 case 9:
                     isContinue = false;
                     break;
