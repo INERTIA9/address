@@ -13,6 +13,7 @@ public class AddressBook {
             System.out.println("1)ADD   2)EDIT   3)DELETE  4)Sort By Name  5)Sort By City  6)Sort By State  7)Sort By Zip  8)Search by City & State  9)Search by City  10)Search by State  11)EXIT");
             int select = sc.nextInt();
             switch (select) {
+                //Add person details
                 case 1:
                     Person person = PersonUtils.record();
                     if(personList.contains(person)){
@@ -22,6 +23,7 @@ public class AddressBook {
                         personList.add(person);
                     }
                     break;
+                //Edit person details
                 case 2:
                     Person personEdit = PersonUtils.record();
                     if(personList.contains(personEdit)){
@@ -37,6 +39,7 @@ public class AddressBook {
                         System.out.println("Person Does not Exist :"+ personEdit.getFname() + " " + personEdit.getLname());
                     }
                     break;
+                //Delete record from Address Book
                 case 3:
                     Person personDelete = PersonUtils.record();
                     if(personList.contains(personDelete)){
@@ -52,30 +55,35 @@ public class AddressBook {
                         System.out.println("Person Does not Exist :"+ personDelete.getFname() + " " + personDelete.getLname());
                     }
                     break;
+                //sort by Name
                 case 4:
                     personList = personList.stream().sorted((p1 , p2) -> p1.getFname().compareTo(p2.getFname())).collect(Collectors.toList());
                     personList.stream().forEach(p->{
                         System.out.println(p);
                     });
                     break;
+                //sort by City
                 case 5:
                     personList = personList.stream().sorted((p1 , p2) -> p1.getCity().compareTo(p2.getCity())).collect(Collectors.toList());
                     personList.stream().forEach(p->{
                         System.out.println(p);
                     });
                     break;
+                //sort by city
                 case 6:
                     personList = personList.stream().sorted((p1 , p2) -> p1.getState().compareTo(p2.getState())).collect(Collectors.toList());
                     personList.stream().forEach(p->{
                         System.out.println(p);
                     });
                     break;
+                //sort by zip
                 case 7:
                     personList = personList.stream().sorted((p1 , p2) -> p1.getZip().compareTo(p2.getZip())).collect(Collectors.toList());
                     personList.stream().forEach(p->{
                         System.out.println(p);
                     });
                     break;
+                //search by state and city
                 case 8:
                     sc.nextLine();
                     System.out.println("Enter the City");
@@ -88,6 +96,7 @@ public class AddressBook {
                         }
                     });
                     break;
+                //view by city
                 case 9:
                     sc.nextLine();
                     System.out.println("Enter the City");
@@ -98,6 +107,7 @@ public class AddressBook {
                         }
                     });
                     break;
+                //view by state
                 case 10:
                     sc.nextLine();
                     System.out.println("Enter the State");
@@ -116,7 +126,7 @@ public class AddressBook {
                     break;
             }
 
-            System.out.println(personList.size());
+            //System.out.println(personList.size());
            /* personList.stream().forEach(p->{
                 System.out.println(p);
             });*/

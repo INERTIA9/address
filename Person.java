@@ -59,15 +59,6 @@ public class Person {
         return "Person [Fname=" + Fname + ", Lname=" + Lname + ", city=" + city + ", state=" + state + ", zip=" + zip
                 + ", pnum=" + pnum + "]";
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((Fname == null) ? 0 : Fname.hashCode());
-        result = prime * result + ((Lname == null) ? 0 : Lname.hashCode());
-        return result;
-    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

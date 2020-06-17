@@ -3,7 +3,7 @@ package com.bridgelabz;
 import java.util.Scanner;
 
 public class PersonUtils {
-
+//method to create person object and set the vlaues
     public static Person record() {
         Person person = new Person();
         Scanner sc = new Scanner(System.in);
@@ -11,10 +11,9 @@ public class PersonUtils {
         person.setFname(sc.nextLine());
         System.out.println("Enter the Last Name");
         person.setLname(sc.nextLine());
-        //reuseRecord(person);
         return person;
     }
-
+//method to set values
     public static Person reuseRecord(Person person) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the City");
