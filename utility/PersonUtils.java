@@ -1,4 +1,6 @@
-package com.bridgelabz;
+package com.bridgelabz.utility;
+
+import com.bridgelabz.service.Person;
 
 import java.util.Iterator;
 import java.util.List;

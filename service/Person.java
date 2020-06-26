@@ -1,4 +1,4 @@
-package com.bridgelabz;
+package com.bridgelabz.service;
 
 public class Person {
     private String Fname;

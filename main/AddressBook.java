@@ -1,4 +1,7 @@
-package com.bridgelabz;
+package com.bridgelabz.main;
+
+import com.bridgelabz.service.Person;
+import com.bridgelabz.utility.PersonUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
