@@ -2,9 +2,13 @@ package com.bridgelabz.utility;
 
 import com.bridgelabz.service.Person;
 
+import java.sql.SQLOutput;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PersonUtils {
     //method to create person object and set the vlaues
@@ -19,45 +23,57 @@ public class PersonUtils {
     }
     //method to set values
     public static Person extraRecord(Person person) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the City");
-        person.setCity(sc.nextLine());
-        System.out.println("Enter the State");
-        person.setState(sc.nextLine());
-        System.out.println("Enter the 6 Digit Zip code");
-        int zip = sc.nextInt();
-        int length = (int) (Math.log10(zip) + 1);
-        while (length != 6) {
-            System.out.println("enter 6 digit number");
-            zip = sc.nextInt();
-            length = (int) (Math.log10(zip) + 1);
-            if (length == 6) {
-                break;
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter the City");
+            person.setCity(sc.nextLine());
+            System.out.println("Enter the State");
+            person.setState(sc.nextLine());
+            System.out.println("Enter the 6 Digit Zip code");
+            int zip = sc.nextInt();
+
+            int length = (int) (Math.log10(zip) + 1);
+            while (length != 6) {
+                System.out.println("enter 6 digit number");
+                zip = sc.nextInt();
+                length = (int) (Math.log10(zip) + 1);
+                if (length == 6) {
+                    break;
+                }
             }
-        }
-        person.setZip(zip);
-        System.out.println("Enter the 10 Digit Mobile Number");
-        long pnum = sc.nextLong();
-        length = (int) (Math.log10(pnum) + 1);
-        while (length != 10) {
-            System.out.println("enter 10 digit number");
-            pnum = sc.nextLong();
+
+            person.setZip(zip);
+            System.out.println("Enter the 10 Digit Mobile Number");
+            long pnum = sc.nextLong();
             length = (int) (Math.log10(pnum) + 1);
-            if (length == 10) {
-                break;
+            while (length != 10) {
+                System.out.println("enter 10 digit number");
+                pnum = sc.nextLong();
+                length = (int) (Math.log10(pnum) + 1);
+                if (length == 10) {
+                    break;
+                }
             }
+            person.setPnum(pnum);
+        }catch (NullPointerException | InputMismatchException e){
+            System.out.println(e);
         }
-        person.setPnum(pnum);
         return person;
     }
     //method for add person
-    public static void addPerson(List personList){
+    public static void addPerson(List<Person> personList){
         Person person = PersonUtils.record();
-        if(personList.contains(person)){
-            System.out.println("Person Already Exist :"+ person.getFname() + " " + person.getLname());
-        }else{
-            person = PersonUtils.extraRecord(person);
-            personList.add(person);
+        String flName = person.getFname()+person.getLname();
+        Boolean valid = PersonUtils.stringChecker(flName);
+        if(valid) {
+            if (personList.contains(person)) {
+                System.out.println("Person Already Exist :" + person.getFname() + " " + person.getLname());
+            } else {
+                person = PersonUtils.extraRecord(person);
+                personList.add(person);
+            }
+        }else {
+            System.out.println("Enter valid name -> Enter only character");
         }
     }
     //method for edit person
@@ -126,5 +142,12 @@ public class PersonUtils {
                 System.out.println(p);
             }
         });
+    }
+
+    public static boolean stringChecker(String checkString){
+        Pattern stringChecker = Pattern.compile("([a-zA-Z]+)");
+        Matcher matchString = stringChecker.matcher(checkString);
+        boolean validString = matchString.matches();
+        return validString;
     }
 }
