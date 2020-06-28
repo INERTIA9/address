@@ -1,6 +1,6 @@
-package com.bridgelabz.main;
+package com.bridgelabz.controller;
 
-import com.bridgelabz.service.Person;
+import com.bridgelabz.model.Person;
 import com.bridgelabz.utility.PersonUtils;
 
 import java.util.*;
@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 public class AddressBook {
     public static void main(String[] args) {
         List<Person> personList = new ArrayList<>();
+        Map<String,List<Person>> cityMap = new HashMap<>();
+        Map<String,List<Person>> stateMap = new HashMap<>();
+
         System.out.println("Welcome to Adderess Book program");
         boolean isContinue = true;
         while (isContinue == true) {
@@ -19,14 +22,20 @@ public class AddressBook {
                 //Add person details
                 case 1:
                     PersonUtils.addPerson(personList);
+                    cityMap = personList.stream().collect(Collectors.groupingBy(Person::getCity));
+                    stateMap = personList.stream().collect(Collectors.groupingBy(Person::getState));
                     break;
                 //Edit person details
                 case 2:
                     PersonUtils.editPersonRecord(personList);
+                    cityMap = personList.stream().collect(Collectors.groupingBy(Person::getCity));
+                    stateMap = personList.stream().collect(Collectors.groupingBy(Person::getState));
                     break;
                 //Delete record from Address Book
                 case 3:
                     PersonUtils.deletePersonRecord(personList);
+                    cityMap = personList.stream().collect(Collectors.groupingBy(Person::getCity));
+                    stateMap = personList.stream().collect(Collectors.groupingBy(Person::getState));
                     break;
                 //sort by Name
                 case 4:
@@ -62,11 +71,11 @@ public class AddressBook {
                     break;
                 //view by city
                 case 9:
-                    PersonUtils.searchByCity(personList);
+                    PersonUtils.searchByCity(cityMap);
                     break;
                 //view by state
                 case 10:
-                    PersonUtils.searchByState(personList);
+                    PersonUtils.searchByState(stateMap);
                     break;
                 case 11:
                     personList.stream().forEach(p->{

@@ -1,12 +1,8 @@
 package com.bridgelabz.utility;
 
-import com.bridgelabz.service.Person;
+import com.bridgelabz.model.Person;
 
-import java.sql.SQLOutput;
-import java.util.InputMismatchException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -122,26 +118,34 @@ public class PersonUtils {
         });
     }
     //method for search by city
-    public static void searchByCity(List<Person> personList){
+    public static void searchByCity(Map<String,List<Person>> cityMap){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the City");
         String city1 = sc.nextLine();
-        personList.stream().forEach(p->{
-            if(p.getCity().equals(city1)){
-                System.out.println(p);
-            }
-        });
+        if(cityMap.containsKey(city1)){
+            cityMap.get(city1).stream().forEach(p->{
+                if(p.getCity().equals(city1)){
+                    System.out.println(p);
+                }
+            });
+        }else{
+            System.out.println("No Person found with city : "+city1);
+        }
     }
     //method for search by state
-    public static void searchByState(List<Person> personList){
+    public static void searchByState(Map<String,List<Person>> stateMap){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the State");
         String state1 = sc.nextLine();
-        personList.stream().forEach(p->{
-            if(p.getState().equals(state1)){
-                System.out.println(p);
-            }
-        });
+        if(stateMap.containsKey(state1)){
+            stateMap.get(state1).stream().forEach(p->{
+                if(p.getState().equals(state1)){
+                    System.out.println(p);
+                }
+            });
+        }else{
+            System.out.println("No Person found with state : "+state1);
+        }
     }
 
     public static boolean stringChecker(String checkString){
