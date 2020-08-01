@@ -3,6 +3,7 @@ package com.bridgelabz.controller;
 import com.bridgelabz.model.Person;
 import com.bridgelabz.service.PersonUtils;
 import com.bridgelabz.utility.CSVReadWrite;
+import com.bridgelabz.utility.GsonToJSONReadWrite;
 import com.bridgelabz.utility.JsonSimpleIO;
 
 import java.util.*;
@@ -12,11 +13,13 @@ public class AddressBook {
     public static void main(String[] args) {
         JsonSimpleIO jsonSimpleIO = new JsonSimpleIO();
         CSVReadWrite csvReadWrite = new CSVReadWrite();
+        GsonToJSONReadWrite gsonToJSONReadWrite = new GsonToJSONReadWrite();
 
         final String JSON_SIMPLE_FILE_PATH = "src/main/resources/JSonSimpleAddressBook.json";
         final String OPEN_CSV_FILE_PATH = "src/main/resources/CSVAddressBook.csv";
+        final String GSON_TO_JSON_FILE_PATH = "src/main/resources/GsonAddressBook.json";
         String filePath = "";
-        final int jsonSampleOperation = 1, openCSVOperation = 2;
+        final int jsonSampleOperation = 1, openCSVOperation = 2, gsonOperation = 3;
         int operations = 0;
         List<Person> personList = new ArrayList<>();
         Map<String, List<Person>> cityMap = new HashMap<>();
@@ -25,7 +28,7 @@ public class AddressBook {
 
         boolean isContinue = true;
         System.out.println("Welcome to Address Book program");
-        System.out.println("Select Below Operations:\n1. JSON SAMPLE\n2. OPEN CSV \n");
+        System.out.println("Select Below Operations:\n1. JSON SAMPLE\n2. OPEN CSV \n3.JSONFileUsingGson");
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
         switch (option) {
@@ -36,16 +39,21 @@ public class AddressBook {
                 break;
             case 2:
                 filePath = OPEN_CSV_FILE_PATH;
-                personList =  csvReadWrite.readDataToList(filePath);
+                personList = csvReadWrite.readDataToList(filePath);
                 operations = openCSVOperation;
+                break;
+            case 3:
+                filePath = GSON_TO_JSON_FILE_PATH;
+                personList = gsonToJSONReadWrite.readDataToList(filePath);
+                operations = gsonOperation;
                 break;
         }
         while (isContinue) {
             Scanner sc = new Scanner(System.in);
             System.out.println("1)ADD   2)EDIT   3)DELETE  4)Sort By Name  5)Sort By City \n " +
-                               "6)Sort By State  7)Sort By Zip  8)Search by City & State  \n" +
-                               "9)Search by City  10)Search by State  11)Display  12)Create File\n" +
-                              "13)EXIT");
+                    "6)Sort By State  7)Sort By Zip  8)Search by City & State  \n" +
+                    "9)Search by City  10)Search by State  11)Display  12)Save File\n" +
+                    "13)EXIT");
             int select = sc.nextInt();
             switch (select) {
                 //Add person details
@@ -102,12 +110,14 @@ public class AddressBook {
                     personList.forEach(System.out::println);
                     break;
                 case 12:
-                    if(operations == 1) {
-                        jsonSimpleIO.writeToJson(personList,filePath);
+                    if (operations == 1) {
+                        jsonSimpleIO.writeToJson(personList, filePath);
                     }
-                    if(operations == 2){
-                        csvReadWrite.writeToCSV(personList,filePath);
+                    if (operations == 2) {
+                        csvReadWrite.writeToCSV(personList, filePath);
                     }
+                    if (operations == 3)
+                        gsonToJSONReadWrite.writeDataToFile(personList, filePath);
                     break;
                 case 13:
                     isContinue = false;
