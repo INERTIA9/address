@@ -2,6 +2,7 @@ package com.bridgelabz.controller;
 
 import com.bridgelabz.model.Person;
 import com.bridgelabz.service.PersonUtils;
+import com.bridgelabz.utility.CSVReadWrite;
 import com.bridgelabz.utility.JsonSimpleIO;
 
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 public class AddressBook {
     public static void main(String[] args) {
         JsonSimpleIO jsonSimpleIO = new JsonSimpleIO();
+        CSVReadWrite csvReadWrite = new CSVReadWrite();
 
         final String JSON_SIMPLE_FILE_PATH = "src/main/resources/JSonSimpleAddressBook.json";
         final String OPEN_CSV_FILE_PATH = "src/main/resources/CSVAddressBook.csv";
@@ -34,6 +36,7 @@ public class AddressBook {
                 break;
             case 2:
                 filePath = OPEN_CSV_FILE_PATH;
+                personList =  csvReadWrite.readDataToList(filePath);
                 operations = openCSVOperation;
                 break;
         }
@@ -103,7 +106,7 @@ public class AddressBook {
                         jsonSimpleIO.writeToJson(personList,filePath);
                     }
                     if(operations == 2){
-                        PersonUtils.writeToCSV(personList,filePath);
+                        csvReadWrite.writeToCSV(personList,filePath);
                     }
                     break;
                 case 13:

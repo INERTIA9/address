@@ -1,12 +1,6 @@
 package com.bridgelabz.service;
 
 import com.bridgelabz.model.Person;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-//import org.json.JSONArray;
-//import org.json.JSONObject;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -150,9 +144,5 @@ public class PersonUtils {
         Matcher matchString = stringChecker.matcher(checkString);
         boolean validString = matchString.matches();
         return validString;
-    }
-
-    public static void writeToCSV(List<Person> personList, String filePath){
-
     }
 }
