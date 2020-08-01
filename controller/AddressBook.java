@@ -2,18 +2,41 @@ package com.bridgelabz.controller;
 
 import com.bridgelabz.model.Person;
 import com.bridgelabz.service.PersonUtils;
+import com.bridgelabz.utility.JsonSimpleIO;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook {
     public static void main(String[] args) {
+        JsonSimpleIO jsonSimpleIO = new JsonSimpleIO();
+
+        final String JSON_SIMPLE_FILE_PATH = "src/main/resources/JSonSimpleAddressBook.json";
+        final String OPEN_CSV_FILE_PATH = "src/main/resources/CSVAddressBook.csv";
+        String filePath = "";
+        final int jsonSampleOperation = 1, openCSVOperation = 2;
+        int operations = 0;
         List<Person> personList = new ArrayList<>();
         Map<String, List<Person>> cityMap = new HashMap<>();
         Map<String, List<Person>> stateMap = new HashMap<>();
 
-        System.out.println("Welcome to Address Book program");
+
         boolean isContinue = true;
+        System.out.println("Welcome to Address Book program");
+        System.out.println("Select Below Operations:\n1. JSON SAMPLE\n2. OPEN CSV \n");
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
+        switch (option) {
+            case 1:
+                filePath = JSON_SIMPLE_FILE_PATH;
+                personList = jsonSimpleIO.getDataInList(filePath);
+                operations = jsonSampleOperation;
+                break;
+            case 2:
+                filePath = OPEN_CSV_FILE_PATH;
+                operations = openCSVOperation;
+                break;
+        }
         while (isContinue) {
             Scanner sc = new Scanner(System.in);
             System.out.println("1)ADD   2)EDIT   3)DELETE  4)Sort By Name  5)Sort By City \n " +
@@ -76,7 +99,12 @@ public class AddressBook {
                     personList.forEach(System.out::println);
                     break;
                 case 12:
-                    PersonUtils.writeToJson();
+                    if(operations == 1) {
+                        jsonSimpleIO.writeToJson(personList,filePath);
+                    }
+                    if(operations == 2){
+                        PersonUtils.writeToCSV(personList,filePath);
+                    }
                     break;
                 case 13:
                     isContinue = false;

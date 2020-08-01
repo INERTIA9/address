@@ -8,6 +8,20 @@ public class Person {
     private Integer zip;
     private Long phoneNumber;
 
+    public Person() {
+    }
+
+    public Person(String firstName, String lastName, String city, String state, Integer zip, Long phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phoneNumber = phoneNumber;
+    }
+
+
+
     public String getFirstName() {
         return firstName;
     }
@@ -58,8 +72,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person [firstName=" + firstName + ", lastName=" + lastName + ", city=" + city + ", state=" + state + ", zip=" + zip
-                + ", phoneNumber=" + phoneNumber + "]";
+        return "Name: " + this.firstName + " " + this.lastName + "\nCity: " + this.city + "\nState: " + this.state + "\nZipcode: " +
+                this.zip + "\nMobile number: " + this.phoneNumber + "\n";
     }
 
     @Override

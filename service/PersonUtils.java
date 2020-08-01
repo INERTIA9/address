@@ -3,7 +3,8 @@ package com.bridgelabz.service;
 import com.bridgelabz.model.Person;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -12,16 +13,13 @@ import java.util.regex.Pattern;
 
 public class PersonUtils {
 
-    static JSONObject personDetails = new JSONObject();
     public static Person addPersonName() {
         Person person = new Person();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the First Name");
         person.setFirstName(sc.nextLine());
-        personDetails.put("firstName", person.getFirstName());
         System.out.println("Enter the Last Name");
         person.setLastName(sc.nextLine());
-        personDetails.put("lastName", person.getLastName());
         return person;
     }
 
@@ -30,10 +28,8 @@ public class PersonUtils {
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter the City");
             person.setCity(sc.nextLine());
-            personDetails.put("city", person.getCity());
             System.out.println("Enter the State");
             person.setState(sc.nextLine());
-            personDetails.put("state", person.getState());
             System.out.println("Enter the 6 Digit Zip code");
             int zip = sc.nextInt();
             int length = (int) (Math.log10(zip) + 1);
@@ -46,7 +42,6 @@ public class PersonUtils {
                 }
             }
             person.setZip(zip);
-            personDetails.put("zip", person.getZip());
             System.out.println("Enter the 10 Digit Mobile Number");
             long phoneNumber = sc.nextLong();
             length = (int) (Math.log10(phoneNumber) + 1);
@@ -59,7 +54,6 @@ public class PersonUtils {
                 }
             }
             person.setPhoneNumber(phoneNumber);
-            personDetails.put("phoneNumber", person.getPhoneNumber());
         } catch (NullPointerException | InputMismatchException e) {
             System.out.println(e);
         }
@@ -158,16 +152,7 @@ public class PersonUtils {
         return validString;
     }
 
-    public static void writeToJson() {
-        JSONObject personObject = new JSONObject();
-        personObject.put("personDetails", personDetails);
-        JSONArray personDetailsList = new JSONArray();
-        personDetailsList.add(personObject);
-        try (FileWriter file = new FileWriter("./ContactList.json")) {
-            file.write(personDetailsList.toString());
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void writeToCSV(List<Person> personList, String filePath){
+
     }
 }
