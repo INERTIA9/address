@@ -1,0 +1,22 @@
+[
+  {
+    "person": {
+      "Zip": 123456,
+      "Phone": 8080707195,
+      "State": "tel",
+      "First Name": "sai",
+      "City": "hyd",
+      "Last Name": "chindam"
+    }
+  },
+  {
+    "person": {
+      "Zip": 987654,
+      "Phone": 9090909090,
+      "State": "maha",
+      "First Name": "sagar",
+      "City": "mumbai",
+      "Last Name": "chindam"
+    }
+  }
+]

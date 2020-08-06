@@ -1,0 +1,18 @@
+[
+  {
+    "firstName": "saipras",
+    "lastName": "chindam",
+    "city": "mm",
+    "state": "mm",
+    "zip": 123456,
+    "phoneNumber": 9876543210
+  },
+  {
+    "firstName": "sagar",
+    "lastName": "chindam",
+    "city": "mumbai",
+    "state": "maha",
+    "zip": 123456,
+    "phoneNumber": 9090909000
+  }
+]
