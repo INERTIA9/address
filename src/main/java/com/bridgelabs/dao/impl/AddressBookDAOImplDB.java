@@ -21,14 +21,15 @@ public class AddressBookDAOImplDB implements IAddressBookDAO {
 
     @Override
     public void addPerson(Person person) {
-        try (java.sql.Connection con = DBConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(INSERT_PERSON_QUERY)) {
-            stmt.setString(1, person.getFirstName());
-            stmt.setString(2, person.getLastName());
-            stmt.setString(3, person.getCity());
-            stmt.setString(4, person.getState());
-            stmt.setInt(5, person.getZip());
-            stmt.setLong(6, person.getPhoneNumber());
+            int counter = 1;
+            stmt.setString(counter++, person.getFirstName());
+            stmt.setString(counter++, person.getLastName());
+            stmt.setString(counter++, person.getCity());
+            stmt.setString(counter++, person.getState());
+            stmt.setInt(counter++, person.getZip());
+            stmt.setLong(counter, person.getPhoneNumber());
             stmt.executeUpdate();
             System.out.println("Person Data inserted successfully");
         } catch (SQLException e) {
@@ -39,10 +40,11 @@ public class AddressBookDAOImplDB implements IAddressBookDAO {
     @Override
     public List<Person> findByCityAndState(Person person) {
         List<Person> personList = new ArrayList<>();
-        try (java.sql.Connection con = DBConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(FIND_PERSON_BY_CITY_AND_STATE)) {
-            stmt.setString(1, person.getCity());
-            stmt.setString(2, person.getState());
+            int counter= 1;
+            stmt.setString(counter++, person.getCity());
+            stmt.setString(counter, person.getState());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Person person1 = new Person();
@@ -63,7 +65,7 @@ public class AddressBookDAOImplDB implements IAddressBookDAO {
     @Override
     public List<Person> findByCity(String city) {
         List<Person> personList = new ArrayList<>();
-        try (java.sql.Connection con = DBConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(FIND_PERSON_BY_CITY)) {
             stmt.setString(1, city);
             ResultSet rs = stmt.executeQuery();
@@ -86,7 +88,7 @@ public class AddressBookDAOImplDB implements IAddressBookDAO {
     @Override
     public List<Person> findByState(String state) {
         List<Person> personList = new ArrayList<>();
-        try (java.sql.Connection con = DBConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(FIND_PERSON_BY_STATE)) {
             stmt.setString(1, state);
             ResultSet rs = stmt.executeQuery();
@@ -110,7 +112,7 @@ public class AddressBookDAOImplDB implements IAddressBookDAO {
     @Override
     public List<Person> findAll() {
         List<Person> personList = new ArrayList<>();
-        try (java.sql.Connection con = DBConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_PERSON_QUERY)) {
             while (rs.next()) {
@@ -132,10 +134,11 @@ public class AddressBookDAOImplDB implements IAddressBookDAO {
     @Override
     public int findByFirstNameAndLastName(Person person) {
         int count = 0;
-        try (java.sql.Connection con = DBConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(QUERY)) {
-            stmt.setString(1, person.getFirstName());
-            stmt.setString(2, person.getLastName());
+            int counter = 1 ;
+            stmt.setString(counter++, person.getFirstName());
+            stmt.setString(counter, person.getLastName());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 count = rs.getInt("total");
@@ -148,14 +151,15 @@ public class AddressBookDAOImplDB implements IAddressBookDAO {
 
     @Override
     public void editPerson(Person person) {
-        try (java.sql.Connection con = DBConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(UPDATE_PERSON)) {
-            stmt.setString(1, person.getCity());
-            stmt.setString(2, person.getState());
-            stmt.setInt(3, person.getZip());
-            stmt.setLong(4, person.getPhoneNumber());
-            stmt.setString(5, person.getFirstName());
-            stmt.setString(6, person.getLastName());
+            int counter = 1;
+            stmt.setString(counter++, person.getCity());
+            stmt.setString(counter++, person.getState());
+            stmt.setInt(counter++, person.getZip());
+            stmt.setLong(counter++, person.getPhoneNumber());
+            stmt.setString(counter++, person.getFirstName());
+            stmt.setString(counter, person.getLastName());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -164,10 +168,11 @@ public class AddressBookDAOImplDB implements IAddressBookDAO {
 
     @Override
     public void deletePerson(Person person) {
-        try (java.sql.Connection con = DBConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(DELETE_PERSON)) {
-            stmt.setString(1, person.getFirstName());
-            stmt.setString(2, person.getLastName());
+            int counter = 1;
+            stmt.setString(counter++, person.getFirstName());
+            stmt.setString(counter, person.getLastName());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
